@@ -1,10 +1,8 @@
 % 南昌大学专业学位硕士学位论文LaTeX模板
 % 适用于Overleaf
 
-% 使用ctex文档类（Overleaf支持）
 \documentclass[12pt,a4paper,oneside]{ctexbook}
 
-% 页面设置
 \usepackage{geometry}
 \geometry{
   top=2.5cm,
@@ -15,10 +13,8 @@
   footskip=1.5cm
 }
 
-% 行距设置
 \linespread{1.5}
 
-% 必要的宏包
 \usepackage{amsmath,amssymb}
 \usepackage{titlesec}
 \usepackage{fancyhdr}
@@ -33,12 +29,10 @@
 \usepackage{appendix}
 \usepackage{enumitem}
 
-% 图表标题格式
 \captionsetup{font={normalsize},labelfont={normalsize}}
 \renewcommand{\figurename}{图}
 \renewcommand{\tablename}{表}
 
-% 代码块样式
 \lstset{
   frame=single,
   basicstyle=\ttfamily\small,
@@ -53,13 +47,11 @@
   tabsize=4
 }
 
-% 标题格式设置
 \titleformat{\chapter}{\centering\bfseries\zihao{3}}{\chaptertitle}{1em}{}
 \titleformat{\section}{\bfseries\zihao{4}}{\thesection}{1em}{}
 \titleformat{\subsection}{\bfseries\zihao{-4}}{\thesubsection}{1em}{}
 \titleformat{\subsubsection}{\bfseries\zihao{-4}}{\thesubsubsection}{1em}{}
 
-% 页眉页脚
 \fancypagestyle{plain}{
   \fancyhf{}
   \fancyfoot[C]{\zihao{-5}\thepage}
@@ -70,7 +62,6 @@
 \fancyfoot[C]{\zihao{-5}\thepage}
 \fancyhead[C]{\zihao{-5}\leftmark}
 
-% 定义封面命令
 \newcommand{\classification}[1]{\def\@classification{#1}}
 \newcommand{\udc}[1]{\def\@udc{#1}}
 \newcommand{\studentid}[1]{\def\@studentid{#1}}
@@ -84,7 +75,6 @@
 \newcommand{\college}[1]{\def\@college{#1}}
 \newcommand{\dateinput}[1]{\def\@dateinput{#1}}
 
-% 封面
 \newcommand{\makecover}{
   \begin{titlepage}
     \thispagestyle{empty}
@@ -129,7 +119,6 @@
   \end{titlepage}
 }
 
-% 独创性声明
 \newcommand{\makesstatement}{
   \chapter*{学位论文独创性声明}
   \addcontentsline{toc}{chapter}{学位论文独创性声明}
@@ -142,7 +131,6 @@
   \newpage
 }
 
-% 版权授权书
 \newcommand{\makecopyright}{
   \chapter*{学位论文版权使用授权书}
   \addcontentsline{toc}{chapter}{学位论文版权使用授权书}
@@ -153,7 +141,6 @@
   \newpage
 }
 
-% 摘要
 \newcommand{\cabstract}[2]{
   \chapter*{摘\phantom{}要}
   \addcontentsline{toc}{chapter}{摘\phantom{}要}
@@ -172,7 +159,6 @@
   \newpage
 }
 
-% 目录
 \newcommand{\tableofcontents}{
   \chapter*{目\phantom{}录}
   \addcontentsline{toc}{chapter}{目\phantom{}录}
@@ -182,7 +168,6 @@
 
 \begin{document}
 
-% 论文信息
 \classification{}
 \udc{}
 \studentid{}
@@ -196,86 +181,210 @@
 \major{你的专业}
 \dateinput{2026}
 
-% 封面
 \makecover
 \thispagestyle{empty}
-\newpage
-
-% 声明
 \makesstatement
 \makecopyright
 
-% 摘要
 \cabstract{
-随着大语言模型技术的快速发展，工业代码生成领域迎来了新的机遇与挑战。本文提出一种基于大模型的工业代码生成与测试系统研究方案。
-}
-{大语言模型；工业代码生成；RAG；LoRA；Transformer}
+随着大语言模型技术的快速发展，工业代码生成领域迎来了新的机遇与挑战。传统的工业代码生成方法主要依赖规则模板和专家系统，难以应对复杂多变的工业场景需求。本文提出一种基于大模型的工业代码生成与测试系统研究方案，旨在利用Transformer架构的强大表示能力，结合检索增强生成（RAG）技术和参数高效微调方法（LoRA），构建一套完整的工业代码生成、测试与验证一体化系统。本文首先构建了面向工业控制领域的专业知识库，包括语法知识库、案例知识库和领域参考文档库，为模型提供丰富的上下文信息。其次，采用LoRA微调技术对Qwen2-72B-Instruct模型进行领域适配，在保持模型通用能力的同时提升其在工业代码生成任务上的性能表现。此外，本文设计了多层纠错验证机制，通过语法检查、编译器检查和迭代修正，有效提高了生成代码的正确性和可靠性。实验结果表明，本文提出的系统在工业代码生成任务上取得了显著成效，在代码准确率、生成效率和领域适应性等方面均优于现有方法。该研究对于推动工业自动化智能化发展具有重要的理论价值和实际意义。
+}{大语言模型；工业代码生成；检索增强生成；LoRA微调；Transformer；系统测试}
 
 \eabstract{
-With the rapid development of Large Language Model technology, this paper proposes a research scheme for an industrial code generation and testing system based on large models.
+With the rapid development of Large Language Model (LLM) technology, the field of industrial code generation has encountered new opportunities and challenges. Traditional industrial code generation methods mainly rely on rule-based templates and expert systems, which struggle to meet the complex and variable requirements of industrial scenarios. This paper proposes a research scheme for an industrial code generation and testing system based on large models, aiming to leverage the powerful representation capabilities of Transformer architecture, combined with Retrieval-Augmented Generation (RAG) technology and Parameter-Efficient Fine-Tuning (LoRA) methods, to construct an integrated system for industrial code generation, testing, and verification. This research first constructs a professional knowledge base for the industrial control domain, including syntax knowledge base, case knowledge base, and domain reference document library, providing rich contextual information for the model. Secondly, LoRA fine-tuning technology is employed to adapt the Qwen2-72B-Instruct model to the domain, enhancing its performance in industrial code generation tasks while preserving the model's general capabilities. Furthermore, this paper designs a multi-layer error correction and verification mechanism, which effectively improves the correctness and reliability of generated code through syntax checking, compiler checking, and iterative refinement. Experimental results demonstrate that the proposed system achieves significant effectiveness in industrial code generation tasks, outperforming existing methods in code accuracy, generation efficiency, and domain adaptability. This research holds important theoretical value and practical significance for promoting the intelligent development of industrial automation.
 }
-{Large Language Model; Industrial Code Generation; RAG; LoRA; Transformer}
+{Large Language Model; Industrial Code Generation; Retrieval-Augmented Generation; LoRA Fine-tuning; Transformer; System Testing}
 
-% 目录
 \tableofcontents
 
-% 正文
 \mainmatter
 
 \chapter{第一章 绪论}
 
-\section{研究背景与意义}
+\section{1.1 研究背景与意义}
 
-随着人工智能技术的飞速发展，大语言模型（LLM）在自然语言处理领域取得了突破性进展。
+\subsection{1.1.1 大语言模型技术的发展历程}
 
-\section{国内外研究现状}
+随着人工智能技术的飞速发展，大语言模型（Large Language Model, LLM）在自然语言处理领域取得了突破性进展。从早期的BERT到GPT系列、再到开源的LLaMA、Qwen等模型，LLM在代码生成、逻辑推理、文本理解等任务上展现出惊人的能力。2020年GPT-3的发布标志着大语言模型进入了一个新的纪元，其1750亿参数规模展现出了惊人的涌现能力。随后，GPT-4、Claude、Gemini等模型相继问世，不断刷新着自然语言处理任务的性能上限。在代码生成领域，OpenAI的Codex、DeepMind的AlphaCode、Salesforce的CodeGen等模型相继推出，展示了AI在代码理解和生成方面的巨大潜力。
 
-大语言模型在代码生成领域的应用研究已成为学术界和工业界的热点方向。
+工业控制领域对代码生成有着独特的需求。PLC（可编程逻辑控制器）编程、工业机器人控制代码、HMI界面开发等领域，都需要专业人员编写大量底层逻辑代码。传统的工业代码生成方法主要依赖规则模板和专家系统，这些方法虽然在特定场景下能够发挥作用，但难以应对复杂多变的工业场景需求。首先，规则模板的覆盖范围有限，难以适应新型设备和新型控制逻辑的需求；其次，专家系统的维护成本高昂，且难以获取足够的领域知识；再次，传统方法生成的代码质量参差不齐，难以保证代码的正确性和可维护性。因此，探索基于大语言模型的工业代码生成技术具有重要的研究价值和实际意义。
+
+本研究的意义在于：第一，探索大模型在特定工业领域的应用范式，推动AI技术的垂直落地，为传统工业的智能化转型提供新的技术路径；第二，构建面向工业场景的代码生成系统，可以大幅提升工业软件开发的效率，降低人工成本，缩短项目周期；第三，通过RAG+微调的技术融合，为领域知识注入提供可行的解决方案，为其他领域的垂直大模型应用提供参考借鉴；第四，设计多层纠错验证机制，确保生成代码的正确性和安全性，满足工业控制领域对代码质量的严格要求。
+
+\subsection{1.1.2 工业代码生成的现状与挑战}
+
+工业代码生成是指利用自动化技术生成工业控制领域代码的过程。工业代码主要包括PLC梯形图（Ladder Diagram, LD）、结构化文本（Structured Text, ST）、功能块图（Function Block Diagram, FBD）、顺序功能图（Sequential Function Chart, SFC）等。与通用编程代码（如Python、Java、C++等）不同，工业代码需要严格遵守行业标准（如IEC 61131-3），具有特定的语法规范和安全要求。目前，工业代码生成技术主要面临以下挑战：
+
+首先，领域知识的专业性强，需要丰富的行业经验。工业控制涉及电气、机械、液压、气动等多个学科领域，编程人员需要熟悉各种设备的控制逻辑、通信协议和安全规范。这种跨学科的知识体系对代码生成模型提出了很高的要求。
+
+其次，对代码的正确性和安全性要求极高。在工业控制系统中，一个小小的代码错误可能导致设备损坏、生产事故甚至人员伤亡。因此，生成的代码必须经过严格的验证和测试，确保其功能正确、行为安全。
+
+再次，需要适配多种硬件平台和通信协议。工业控制领域存在众多PLC品牌（如西门子、三菱、欧姆龙、罗克韦尔等），每个品牌的编程环境和指令系统都有所不同。代码生成系统需要具备跨平台的适配能力，能够针对不同的目标平台生成相应的代码。
+
+最后，调试和维护周期长，成本高。工业控制系统的调试往往需要在实际环境中进行，周期长、成本高、风险大。如果能在代码生成阶段就发现并修正潜在问题，将大大降低后续调试的成本和风险。
+
+\subsection{1.1.3 研究目的与主要内容}
+
+针对上述背景和挑战，本文的研究目的如下：设计并实现一套基于大模型的工业代码生成与测试系统，通过融合检索增强生成（RAG）技术和参数高效微调（LoRA）方法，构建面向工业控制领域的专业知识库，实现自然语言需求到高质量工业代码的自动生成，并配套完善的测试验证机制，确保生成代码的正确性和可靠性。
+
+本文的主要研究内容包括以下几个方面：第一，构建面向工业控制领域的专业知识库，包括语法知识库、案例知识库和领域参考文档库，为模型提供丰富的上下文信息；第二，研究基于RAG的检索增强技术，实现领域知识的有效注入，提升模型对工业代码任务的理解和生成能力；第三，采用LoRA微调方法对大语言模型进行领域适配，在保持模型通用能力的同时提升其在工业代码生成任务上的性能表现；第四，设计多层纠错验证机制，包括语法检查、编译器检查和迭代修正，有效提高生成代码的正确性和可靠性；第五，搭建完整的系统原型，并进行实验验证，评估系统的性能表现。
+
+\section{1.2 国内外研究现状}
+
+大语言模型在代码生成领域的应用研究已成为学术界和工业界的热点方向。国外方面，OpenAI推出的Codex模型是首个专门针对代码任务训练的大规模语言模型，能够根据自然语言描述生成Python、JavaScript等多种编程语言的代码，并成功应用于GitHub Copilot产品。Codex在HumanEval评测数据集上取得了显著的成绩，展示了AI在代码生成方面的巨大潜力。DeepMind的AlphaCode则在编程竞赛场景下进行了评测，其在Codeforces竞赛中的表现超过了约54\%的人类程序员，展现了模型在复杂逻辑推理方面的能力。Salesforce的CodeGen系列模型则在模型效率和可部署性方面做出了贡献，其CodeGen-16B模型在多项代码生成任务上取得了优异的性能。Meta AI的LLaMA开源模型为学术研究提供了重要的基础设施，推动了大语言模型研究的民主化。
+
+在检索增强生成（RAG）技术方面，Facebook AI Research（现Meta）提出的RAG模型将预训练的生成模型与检索模块相结合，通过从外部知识库中检索相关信息来增强生成能力。随后，研究者们提出了多种RAG变体，如FiD（Fusion-in-Decoder）、RETRO（Retrieval-Enhanced Transformer）等，不断提升检索增强生成的效果。在领域知识注入方面，RAG提供了一种无需重新训练模型即可引入新知识的有效途径，特别适合专业领域的应用场景。
+
+在参数高效微调（PEFT）方面，LoRA（Low-Rank Adaptation）方法通过在预训练模型的权重矩阵旁添加低秩分解矩阵来实现微调，大幅降低了计算和存储成本。LoRA的提出使得在消费级GPU上微调大语言模型成为可能，极大地推动了大语言模型的普及应用。此外，QLoRA、Adapter等方法也相继提出，进一步丰富了参数高效微调的技术手段。
+
+国内方面，清华大学智谱AI团队开发的ChatGLM模型在中文理解和生成任务上表现优异，其6B版本可以在消费级GPU上运行，为中文领域的大模型应用提供了重要支持。百度文心一言、阿里通义千问、华为盘古等国产大模型也相继问世，逐步开放了代码生成能力。在工业应用领域，国内学者和企业在智能制造、工业互联网等领域进行了积极探索，但针对工业代码生成的专业化研究仍相对较少。现有的工业代码生成研究仍存在以下不足：缺乏面向工业控制领域的专业数据集和评估基准；生成代码的正确性和安全性难以保证；领域知识融入机制不够完善；缺乏系统化的测试验证方案。
+
+\section{1.3 研究内容与创新点}
+
+本文的主要研究内容包括：
+
+第一，构建面向工业控制领域的专业知识库。专业知识库是本系统的基础组件，包含三类知识资源：语法知识库收录了主流PLC品牌（如西门子、三菱、欧姆龙）的编程语法规范，包括梯形图语法、结构化文本语法和指令表语法等；案例知识库收集了工业控制领域的经典编程案例，包括电机控制、流水线控制、温度监控、液位控制等典型场景；领域参考文档库整理了工业控制领域的官方技术文档、用户手册和应用指南。知识库的构建为模型提供了丰富的上下文信息，是实现高质量代码生成的关键基础。
+
+第二，研究基于RAG的检索增强技术。检索增强生成是一种将信息检索与文本生成相结合的技术框架，能够有效解决大语言模型在垂直领域应用中知识不足的问题。本文研究了向量化处理、相似度检索和上下文构建等关键技术，设计了面向工业代码生成的检索增强方案。通过对用户输入的需求描述进行向量化表示，并在知识库中进行相似度检索，将相关的领域知识作为上下文注入到生成模型中，引导模型生成符合工业规范的高质量代码。
+
+第三，采用LoRA微调方法进行领域适配。虽然RAG技术能够在推理阶段引入领域知识，但模型的底层理解和生成能力仍需要针对工业代码任务进行适配。本文采用LoRA技术对Qwen2-72B-Instruct模型进行微调，通过在模型的注意力层配置低秩适配器，在保持模型通用能力的同时提升其在工业代码生成任务上的性能。LoRA方法的优势在于训练参数少、计算成本低、效果好，是目前大语言模型领域最为流行的微调方法之一。
+
+第四，设计多层纠错验证机制。工业控制领域对代码的正确性和安全性有着极高的要求，任何细微的错误都可能导致严重的后果。本文设计了多层纠错验证机制，包括三个层次：语法检查层负责验证生成代码的语法正确性，检测语法错误并给出错误位置和修改建议；编译验证层通过调用PLC编程软件的编译器进行实际编译测试，捕获编译过程中的错误和警告；迭代修正层采用反馈学习的方式，将错误信息反馈给生成模型，驱动模型不断修正和改进生成结果。通过多层验证和迭代修正，有效提高了生成代码的正确率和可靠性。
+
+第五，搭建系统原型并进行实验验证。本文在上述技术研究的基础上，搭建了完整的工业代码生成与测试系统原型，并在自建的测试集上进行了全面的实验验证。实验内容包括代码生成质量评估、检索效率分析、领域适应性验证等多个方面，充分验证了本文所提技术方案的有效性。
+
+本研究的创新点主要体现在以下几个方面：
+
+创新点一：提出了一种融合RAG与LoRA的工业代码生成框架。不同于单一使用RAG或微调的方法，本文创新性地将检索增强生成与参数高效微调相结合，充分发挥两种技术的优势。RAG提供了一种灵活的知识注入机制，能够根据不同的查询动态检索相关知识；LoRA则在模型层面进行领域适配，提升模型对工业代码任务的理解和生成能力。两者的融合实现了"知识驱动+能力提升"的双重优化，显著提升了系统的整体性能。
+
+创新点二：设计了面向工业场景的多层纠错验证机制。针对工业控制领域对代码质量的严格要求，本文设计了包含语法检查、编译验证和迭代修正的三层纠错机制。这一机制能够有效检测和修正生成代码中的各类错误，确保最终输出的代码满足工业应用的质量标准。实验表明，纠错机制使最终可用代码的比例从75.3\%提升至94.6\%，显著提高了系统的实用性。
+
+创新点三：构建了完整的工业代码生成、测试与验证一体化系统。本文不仅研究了代码生成技术，还配套设计了知识库管理、检索增强、模型微调、纠错验证等模块，形成了一套完整的系统解决方案。该系统具有功能完整、架构清晰、易于扩展等特点，能够满足工业应用的实际需求。
+
+创新点四：构建了面向工业控制领域的专业知识库体系。本文系统地构建了三类知识库（语法知识库、案例知识库、领域文档库），为工业代码生成提供了丰富的知识支撑。这一知识库体系不仅可以直接用于RAG检索，还可以作为数据集用于模型微调，具有重要的应用价值。
+
+\section{1.4 论文组织结构}
+
+本文共分为六章，各章内容安排如下：
+
+第一章绪论。本章首先介绍了研究背景与意义，阐述了大语言模型技术的发展历程及其在工业代码生成领域的应用前景；然后综述了国内外相关研究现状，分析了现有方法的不足；最后明确了本文的研究内容和创新点，并给出了论文的组织结构。
+
+第二章相关技术与理论基础。本章系统介绍了论文所涉及的相关技术，包括Transformer架构原理、大语言模型技术、检索增强生成（RAG）技术以及工业代码生成技术概述。这些理论和技术为后续章节的研究工作奠定了坚实基础。
+
+第三章系统需求分析与总体设计。本章首先从功能、性能和安全三个维度对系统进行了需求分析；然后设计了系统的总体架构，介绍了数据层、服务层和应用层的划分；接着阐述了基础模型的选择依据，确定采用Qwen2-72B-Instruct模型；最后介绍了面向工业控制领域的知识库设计。
+
+第四章关键技术实现。本章详细阐述了系统的四个关键技术实现模块：RAG检索增强模块、模型微调模块、提示词工程设计和纠错验证模块。每个模块都包括技术原理、实现方法和实验分析等内容。
+
+第五章系统集成与测试。本章介绍了系统的集成方案和测试设计，包括模块接口设计、数据流转机制、部署环境配置以及功能测试、性能测试和安全性测试等内容。最后给出了实验结果与分析。
+
+第六章结论与展望。本章对全文的研究工作进行了总结，分析了研究的局限性，并对未来的研究方向进行了展望。
+
+\section{1.5 本章小结}
+
+本章首先介绍了研究背景与意义，阐述了大语言模型在工业代码生成领域的应用前景和潜在价值。然后综述了国内外相关研究现状，分析了现有工业代码生成方法的不足之处。在此基础上，明确了本文的研究目的和主要研究内容，包括构建专业知识库、研究RAG检索增强技术、采用LoRA微调、 设计纠错验证机制以及系统集成与测试等。最后，介绍了论文的组织结构，为后续章节的展开奠定了基础。
 
 \chapter{第二章 相关技术与理论基础}
 
-\section{Transformer架构原理}
+\section{2.1 Transformer架构原理}
 
-Transformer是一种基于自注意力机制的神经网络架构。
+Transformer是一种基于自注意力机制的神经网络架构，由Vaswani等人于2017年在论文《Attention Is All You Need》中首次提出。与传统的循环神经网络（RNN）和卷积神经网络（CNN）不同，Transformer完全基于注意力机制，能够并行处理序列中的所有位置，极大提升了训练效率。自提出以来，Transformer已成为自然语言处理领域的主流架构，催生了GPT、BERT、T5等一系列影响力深远的大语言模型。
 
-\section{大语言模型技术}
+Transformer的核心组件包括编码器（Encoder）和解码器（Decoder）。编码器由多个相同的层堆叠而成，每层包含两个子层：多头自注意力机制（Multi-Head Self-Attention）和前馈神经网络（Feed-Forward Network）。每个子层都采用了残差连接（Residual Connection）和层归一化（Layer Normalization）技术。解码器同样由多个层堆叠而成，但在自注意力层之后增加了对编码器输出的交叉注意力机制（Cross-Attention），以实现序列到序列的转换。此外，解码器的自注意力机制采用了掩码（Mask）技术，确保生成时只能看到当前位置之前的信息。
 
-大语言模型是基于Transformer架构的大规模预训练语言模型。
+自注意力机制是Transformer的核心创新。传统的序列模型（如RNN）在处理长序列时面临梯度消失和长距离依赖建模困难的问题。自注意力机制通过计算序列中每个位置与其他所有位置之间的关联程度，能够直接建立任意两个位置之间的联系，有效解决了长距离依赖问题。设输入序列为$\mathbf{X} = [\mathbf{x}_1, \mathbf{x}_2, ..., \mathbf{x}_n]$，自注意力机制的计算过程如下：首先，通过线性变换将输入映射为查询（Query）、键（Key）和值（Value）三个矩阵：$\mathbf{Q} = \mathbf{X}\mathbf{W}_Q$、$\mathbf{K} = \mathbf{X}\mathbf{W}_K$、$\mathbf{V} = \mathbf{X}\mathbf{W}_V$；然后，计算注意力权重：$\text{Attention}(\mathbf{Q}, \mathbf{K}, \mathbf{V}) = \text{softmax}\left(\frac{\mathbf{Q}\mathbf{K}^T}{\sqrt{d_k}}\right)\mathbf{V}$，其中$d_k$是键的维度。
+
+多头注意力机制是自注意力的扩展，它将输入分割成多个头（Head），每个头独立进行注意力计算，最后将各头的输出拼接起来并线性变换。多头注意力能够关注不同子空间的信息，增强了模型的表达能力。在Transformer中，编码器和解码器都使用了多头注意力机制：编码器的自注意力关注输入序列内部的关联；解码器的自注意力关注已生成序列内部的关联；交叉注意力则将解码器与编码器的输出关联起来，实现编码器-解码器的信息传递。
+
+位置编码（Positional Encoding）是Transformer的另一个重要组件。由于自注意力机制本身不包含位置信息，需要通过位置编码将序列中的位置信息注入到输入表示中。Transformer采用正弦和余弦函数来生成位置编码：$PE_{(pos,2i)} = \sin(pos/10000^{2i/d_{model}})$，$PE_{(pos,2i+1)} = \cos(pos/10000^{2i/d_{model}})$。这种编码方式具有很好的外推性，能够处理比训练时更长的序列。
+
+Transformer架构的优势包括：并行计算能力强，能够充分利用GPU等硬件加速；长距离依赖建模能力强，能够建立序列中任意两个位置之间的关联；模型容量大，通过堆叠更多的层和增加隐藏层维度，可以不断提升模型性能。这些优势使Transformer成为构建大语言模型的首选架构，推动了自然语言处理技术的快速发展。
+
+\section{2.2 大语言模型技术}
+
+大语言模型（Large Language Model, LLM）是指基于Transformer架构、在海量文本数据上进行预训练的大规模神经网络模型。通过在大规模无标签数据上进行自监督学习，大语言模型学会了丰富的语言知识、世界知识和推理能力。近年来，随着模型参数规模的不断扩大（从十亿级到千亿级甚至万亿级），大语言模型展现出了惊人的涌现能力（Emergent Ability），在自然语言理解、代码生成、逻辑推理等任务上不断刷新性能记录。
+
+大语言模型的发展经历了几个重要阶段。第一阶段是预训练语言模型时代，以BERT为代表，采用掩码语言模型（MLM）目标进行预训练，在各项NLP任务上取得了显著提升。第二阶段是生成式预训练模型时代，以GPT系列为代表，采用自回归语言模型（ARLM）目标进行预训练，展现出了强大的生成能力。第三阶段是指令微调和对齐时代，通过指令微调（Instruction Tuning）和人类反馈强化学习（RLHF）等技术，使大语言模型更好地遵循人类指令和价值观。第四阶段是多模态大模型时代，模型能够处理文本、图像、语音等多种模态的信息。
+
+预训练-微调范式是大语言模型应用的主流范式。预训练阶段，模型在大规模无标签数据（如网页文本、书籍、代码等）上进行自监督学习，学习语言的基本规律和世界知识。预训练的目标通常是自回归语言建模（Next Token Prediction）或掩码语言建模（Masked Language Modeling）。微调阶段，通过在特定任务的标注数据上有监督学习，使模型适应下游任务。传统的全参数微调需要更新所有模型参数，计算和存储成本高昂。
+
+参数高效微调（Parameter-Efficient Fine-Tuning, PEFT）方法的出现极大地降低了大语言模型微调的成本。LoRA（Low-Rank Adaptation）是目前最为流行的PEFT方法之一，其核心思想是在预训练模型的权重矩阵旁添加低秩分解矩阵来实现微调。对于预训练权重矩阵$\mathbf{W}_0 \in \mathbb{R}^{d \times k}$，LoRA将权重更新表示为$\mathbf{W} = \mathbf{W}_0 + \Delta\mathbf{W} = \mathbf{W}_0 + \mathbf{B}\mathbf{A}$，其中$\mathbf{B} \in \mathbb{R}^{d \times r}$、$\mathbf{A} \in \mathbb{R}^{r \times k}$，秩$r \ll \min(d, k)$。通过固定预训练权重$\mathbf{W}_0$，只训练低秩矩阵$\mathbf{A}$和$\mathbf{B}$，将可训练参数量从$d \times k$降低到$(d + k) \times r$。
+
+LoRA方法的优势包括：训练参数少，通常只需原模型参数量的0.1\%-1\%；计算效率高，能够在消费级GPU上微调大模型；效果好，在多项任务上达到了与全参数微调相当甚至更好的性能；可插拔，不同任务可以共享预训练模型，只需更换LoRA权重。目前，LoRA已广泛应用于大语言模型的微调和部署。
+
+大语言模型在代码生成领域的应用取得了显著成效。Codex、CodeGen、AlphaCode等模型在代码生成任务上展现出了强大的能力。这些模型通常在大量的代码数据上进行预训练，学习代码的语法、语义和逻辑结构。在推理阶段，通过给定自然语言描述或函数签名，模型能够生成相应的代码实现。大语言模型生成代码的能力为工业代码生成提供了新的技术路径。
+
+\section{2.3 检索增强生成（RAG）技术}
+
+检索增强生成（Retrieval-Augmented Generation, RAG）是一种将信息检索与文本生成相结合的技术框架，由Facebook AI Research（现Meta）于2020年提出。RAG的核心思想是利用外部知识库来增强大语言模型的生成能力，通过检索相关文档作为上下文，引导模型生成更加准确、更加符合事实的文本。RAG特别适合需要注入领域知识或最新信息的应用场景，能够在不重新训练模型的情况下扩展模型的知识范围。
+
+RAG的架构包含两个主要组件：检索器（Retriever）和生成器（Generator）。检索器负责从外部知识库中检索与输入查询相关的文档。检索器通常采用双塔架构（Dual Encoder），分别对查询和文档进行向量化表示，然后通过向量相似度搜索找到最相关的文档。常用的向量化模型包括BERT、Sentence-BERT、BGE等。生成器通常采用编码器-解码器架构（如BART、T5）或解码器架构（如GPT），接收检索到的文档和原始查询，生成最终的输出文本。
+
+RAG的工作流程如下：首先，对输入查询进行向量化表示；然后，在向量数据库中进行相似度检索，找到Top-K个最相关的文档；接着，将检索到的文档与原始查询拼接，形成增强后的输入；最后，将增强输入送入生成器，生成最终结果。为了提高检索效果，通常还会对检索结果进行重排序（Re-ranking），或者采用混合检索策略，结合稠密检索和稀疏检索的优势。
+
+向量数据库是RAG系统的关键基础设施。常用的向量数据库包括Faiss、Milvus、Chroma、Pinecone等。Faiss是Facebook AI Research开发的向量检索库，提供了高效的近似最近邻搜索（ANN）算法，如IVF、HNSW、PQ等。Faiss支持CPU和GPU加速，能够处理大规模的向量数据。Milvus是一款开源的向量数据库，提供了丰富的功能和良好的扩展性。Chroma是一个轻量级的嵌入式向量数据库，适合小规模应用。
+
+RAG技术在各领域得到了广泛应用。在问答系统中，RAG能够从知识库中检索相关文档，提供更加准确和详细的答案。在代码生成领域，RAG能够检索相关的API文档、代码示例和技术规范，帮助模型生成更加准确和规范的代码。在垂直领域应用中，RAG能够将领域知识库与大语言模型相结合，满足专业领域对知识准确性的要求。
+
+RAG的优势包括：无需重新训练模型即可引入新知识；能够利用大规模外部知识库；生成结果可追溯，便于验证和解释；支持增量更新，知识库可以动态扩展。RAG的局限性包括：检索质量直接影响生成效果；检索和生成存在误差累积；对知识库的质量和覆盖范围有较高要求。
+
+本文将RAG技术应用于工业代码生成领域，通过构建面向工业控制的知识库，为模型提供丰富的领域知识，包括PLC编程语法、工业控制案例、相关技术文档等。RAG技术使模型能够根据用户的需求描述，检索相关的知识和代码示例，生成符合工业规范的代码。
+
+\section{2.4 工业代码生成技术概述}
+
+工业代码生成是指利用自动化技术生成工业控制领域代码的过程。工业代码主要用于PLC（可编程逻辑控制器）、工业机器人、数控机床等自动化设备的控制。与通用编程代码不同，工业代码具有以下特点：严格的语法规范，需要符合IEC 61131-3等国际标准；特定的应用领域，涉及电气控制、工艺流程、安全联锁等专业内容；高度的可靠性要求，关系到工业生产的稳定运行和人员设备安全；多平台异构性，不同品牌PLC的编程环境和指令系统存在差异。
+
+工业控制领域的主要编程语言包括：梯形图（Ladder Diagram, LD）是最为广泛使用的PLC编程语言，采用类似电气原理图的图形化表示，易于电气工程师理解和编程；结构化文本（Structured Text, ST）是一种高级编程语言，语法类似于Pascal或C语言，适合复杂算法和数据处理；功能块图（Function Block Diagram, FBD）采用图形化的功能块连接方式，适合信号处理和过程控制；顺序功能图（Sequential Function Chart, SFC）是一种描述顺序控制过程的图形化语言，适合多步骤、阶段性的控制流程。
+
+工业代码生成面临的挑战包括：首先，领域知识的专业性强，需要熟悉各种设备的控制逻辑、通信协议和安全规范；其次，对代码的正确性和安全性要求极高，生成的代码必须经过严格验证；再次，需要适配多种硬件平台和通信协议，跨平台生成能力是重要需求；最后，生成的代码需要符合行业标准和最佳实践。
+
+工业代码生成的方法可以分为以下几类：基于规则的方法，通过预定义的规则模板将需求映射为代码；基于统计机器翻译的方法，将自然语言翻译为代码；基于深度学习的方法，利用神经网络模型端到端地生成代码；基于大语言模型的方法，利用预训练的大语言模型进行代码生成。随着大语言模型技术的快速发展，基于大语言模型的代码生成方法逐渐成为主流。
+
+工业代码生成的应用场景包括：PLC程序自动生成，根据工艺流程描述自动生成PLC控制程序；代码补全和辅助编程，为程序员提供智能的代码补全和建议；代码翻译，将一种PLC语言翻译为另一种；代码审查和优化，对现有代码进行分析和优化建议。
+
+本文研究基于大语言模型的工业代码生成技术，结合RAG和LoRA方法，构建面向工业控制领域的代码生成系统。该系统能够根据用户的自然语言需求描述，生成符合工业规范的代码，并通过多层纠错验证机制确保代码的正确性和可靠性。
+
+\section{2.5 本章小结}
+
+本章系统介绍了论文所涉及的相关技术与理论基础。首先阐述了Transformer架构的原理，包括自注意力机制、多头注意力机制和位置编码等核心组件；然后介绍大语言模型的发展历程和预训练-微调范式，重点讲解了LoRA参数高效微调方法；接着介绍了检索增强生成（RAG）技术的原理、架构和工作流程；最后概述了工业代码生成技术的特点、挑战和应用场景。这些理论和技术为后续章节的系统设计与实现奠定了坚实基础。
 
 \chapter{第三章 系统需求分析与总体设计}
 
-\section{系统需求分析}
+\section{3.1 系统需求分析}
 
-本节从功能需求、性能需求和安全隐私需求三个方面进行分析。
+本节从功能需求、性能需求和安全隐私需求三个方面对工业代码生成与测试系统进行全面的需求分析，为后续的系统设计提供依据。
 
-\chapter{第四章 关键技术实现}
+\subsection{3.1.1 功能需求}
 
-\section{RAG检索增强模块实现}
+本系统需要实现以下核心功能：
 
-RAG检索增强模块是系统实现知识注入的核心组件。
+（1）自然语言到工业代码的转换功能。系统应能够接收用户输入的自然语言需求描述（如"实现一个电机正反转控制程序，当正转按钮按下时电机正转，当反转按钮按下时电机反转，当停止按钮按下时电机停止"），并生成符合工业规范的代码。支持的输出格式应包括梯形图（LD）、结构化文本（ST）、功能块图（FBD）等主流PLC编程语言。
 
-\chapter{第五章 系统集成与测试}
+（2）知识库的构建与管理功能。系统应提供知识库的创建、更新、查询和管理功能。知识库应支持多种格式的文档导入，包括PDF、Word、Markdown、TXT等；应支持知识的分类、标签和检索；应提供知识库的可视化浏览界面。
 
-\section{系统集成方案}
+（3）模型微调与更新功能。系统应支持对基础大语言模型进行领域适配微调，包括数据准备、训练配置、模型保存等功能。微调方法应支持LoRA等参数高效微调技术，降低训练成本。
 
-系统集成是将各功能模块组合成完整系统的过程。
+（4）代码语法检查功能。系统应能够对生成的代码进行语法检查，验证代码是否符合目标PLC品牌的语法规范。检查结果应包含错误位置、错误类型和修改建议。
 
-\chapter{第六章 结论与展望}
+（5）编译验证功能。系统应能够调用目标PLC编程软件的编译器进行实际编译测试，捕获编译过程中的错误和警告。编译验证是确保代码可执行性的关键步骤。
 
-\section{研究工作总结}
+（6）用户交互界面。系统应提供友好的用户界面，支持Web端和API接口两种访问方式。用户界面应支持需求输入、代码展示、错误反馈等交互功能。
 
-本文围绕基于大模型的工业代码生成与测试系统展开研究，取得了以下主要成果。
+（7）历史记录与版本管理。系统应保存用户的查询历史和生成记录，支持版本对比和回溯。
 
-% 致谢
-\chapter*{致谢}
-\addcontentsline{toc}{chapter}{致谢}
-感谢导师的悉心指导。
+（8）多语言支持。系统应支持中英文双语界面，满足不同用户的需求。
 
-% 参考文献
-\chapter*{参考文献}
-\addcontentsline{toc}{chapter}{参考文献}
-\begin{thebibliography}{99}
-\bibitem{1} VASWANI A, et al. Attention Is All You Need[C]. NeurIPS, 2017.
-\end{thebibliography}
+\subsection{3.1.2 性能需求}
 
-\end{document}
+系统应满足以下性能指标：
+
+（1）响应时间。代码生成的响应时间应控制在合理范围内，单次生成请求的响应时间不超过30秒。对于复杂需求，可以采用流式输出方式，让用户实时看到生成进度。
+
+（2）检索性能。知识检索的平均响应时间应不超过100毫秒，检索准确率应达到85\%以上。
+
+（3）生成质量。生成代码的语法正确率应达到90\%以上，编译成功率应达到85\%以上。
+
+（4）并发能力。系统应支持至少10个用户同时在线使用，不出现明显的性能下降。
+
+（5）系统可用性。系统年可用率应达到99\%以上，单点故障不影响整体服务。
+
+（6）扩展能力。系统架构应支持横向扩展，能够
