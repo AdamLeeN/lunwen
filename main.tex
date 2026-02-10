@@ -1,27 +1,11 @@
 % 南昌大学专业学位硕士学位论文LaTeX模板
-% 适用于Overleaf (使用XeLaTeX编译)
+% 适用于Overleaf
 
-\documentclass[12pt,a4paper,oneside]{book}
-
-% 导入必要的宏包
-\usepackage{xeCJK}                    % 中文支持（XeLaTeX）
-\usepackage{amsmath,amssymb}          % 数学公式
-\usepackage{geometry}                 % 页面设置
-\usepackage{setspace}                 % 行距设置
-\usepackage{titlesec}                 % 标题格式
-\usepackage{fancyhdr}                 % 页眉页脚
-\usepackage{graphicx}                 % 图形支持
-\usepackage{caption}                 % 图表标题
-\usepackage{subcaption}              % 子图标题
-\usepackage{booktabs}                % 表格线
-\usepackage[hidelinks]{hyperref}      % 超链接
-\usepackage{listings}                % 代码块
-\usepackage{xcolor}                  % 颜色支持
-\usepackage{longtable}               % 长表格
-\usepackage{appendix}                 % 附录
-\usepackage{enumitem}                % 列表样式
+% 使用ctex文档类（Overleaf支持）
+\documentclass[12pt,a4paper,oneside]{ctexbook}
 
 % 页面设置
+\usepackage{geometry}
 \geometry{
   top=2.5cm,
   bottom=2.5cm,
@@ -34,35 +18,20 @@
 % 行距设置
 \linespread{1.5}
 
-% 中文字体设置 - 使用Overleaf支持的开源字体
-\setCJKmainfont{Noto Serif SC}[BoldFont=Noto Serif SC Bold]
-\setCJKsansfont{Noto Sans SC}
-\setCJKfamilyfont{song}{Noto Serif SC}
-\setCJKfamilyfont{hei}{Noto Sans SC Bold}
-\setCJKfamilyfont{kai}{Noto Sans SC}
-\setCJKfamilyfont{fs}{Noto Sans SC}
-
-\newcommand{\song}{\CJKfamily{song}}
-\newcommand{\hei}{\CJKfamily{hei}}
-\newcommand{\kai}{\CJKfamily{kai}}
-\newcommand{\fs}{\CJKfamily{fs}}
-
-% 标题格式设置
-\titleformat{\chapter}{\centering\hei\zihao{3}}{\chaptertitle}{1em}{}
-\titleformat{\section}{\hei\zihao{4}}{\thesection}{1em}{}
-\titleformat{\subsection}{\hei\zihao{-4}}{\thesubsection}{1em}{}
-\titleformat{\subsubsection}{\hei\zihao{-4}}{\thesubsubsection}{1em}{}
-
-% 页眉页脚设置
-\fancypagestyle{plain}{
-  \fancyhf{}
-  \fancyfoot[C]{\zihao{-5}\thepage}
-  \renewcommand{\headrulewidth}{0pt}
-}
-\pagestyle{fancy}
-\fancyhf{}
-\fancyfoot[C]{\zihao{-5}\thepage}
-\fancyhead[C]{\zihao{-5}\leftmark}
+% 必要的宏包
+\usepackage{amsmath,amssymb}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{booktabs}
+\usepackage[hidelinks]{hyperref}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{longtable}
+\usepackage{appendix}
+\usepackage{enumitem}
 
 % 图表标题格式
 \captionsetup{font={normalsize},labelfont={normalsize}}
@@ -84,7 +53,24 @@
   tabsize=4
 }
 
-% 定义封面信息命令
+% 标题格式设置
+\titleformat{\chapter}{\centering\bfseries\zihao{3}}{\chaptertitle}{1em}{}
+\titleformat{\section}{\bfseries\zihao{4}}{\thesection}{1em}{}
+\titleformat{\subsection}{\bfseries\zihao{-4}}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\bfseries\zihao{-4}}{\thesubsubsection}{1em}{}
+
+% 页眉页脚
+\fancypagestyle{plain}{
+  \fancyhf{}
+  \fancyfoot[C]{\zihao{-5}\thepage}
+  \renewcommand{\headrulewidth}{0pt}
+}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\zihao{-5}\thepage}
+\fancyhead[C]{\zihao{-5}\leftmark}
+
+% 定义封面命令
 \newcommand{\classification}[1]{\def\@classification{#1}}
 \newcommand{\udc}[1]{\def\@udc{#1}}
 \newcommand{\studentid}[1]{\def\@studentid{#1}}
@@ -103,31 +89,22 @@
   \begin{titlepage}
     \thispagestyle{empty}
     \vspace*{0.5cm}
-    
-    % 分类号和密级
     \begin{flushright}
-      \zihao{-5}
-      分类号：\@classification \hspace{2cm} 密级：\underline{\hspace{1.5cm}} \\
+      \zihao{-5}分类号：\@classification \hspace{2cm} 密级：\underline{\hspace{1.5cm}} \\
       UDC：\@udc \hspace{2cm} 学号：\@studentid
     \end{flushright}
     \vspace{1cm}
-    
-    % 学校名称
     \begin{center}
-      \hei\zihao{1} 南 昌 大 学 专 业 学 位 硕 士 研 究 生 \\
-      \hei\zihao{1} 学 位 论 文
+      \heiti\zihao{1} 南 昌 大 学 专 业 学 位 硕 士 研 究 生 \\
+      \heiti\zihao{1} 学 位 论 文
     \end{center}
     \vspace{2cm}
-    
-    % 论文题目
     \begin{center}
-      \hei\zihao{3} \@thesistitle \\
+      \heiti\zihao{3} \@thesistitle \\
       \vspace{1cm}
       \@thesistitleen
     \end{center}
     \vspace{3cm}
-    
-    % 作者信息
     \begin{center}
       \zihao{4}
       \begin{tabular}{ll}
@@ -140,16 +117,12 @@
       \end{tabular}
     \end{center}
     \vspace{2cm}
-    
-    % 答辩委员会
     \begin{flushleft}
       \zihao{-4}
       \hspace{1cm}答辩委员会主席：\underline{\hspace{3cm}} \\
       \hspace{1cm}评~~阅~~人：\underline{\hspace{3cm}}
     \end{flushleft}
     \vspace{2cm}
-    
-    % 日期
     \begin{center}
       \@dateinput 年 \@dateinput 月 \@dateinput 日
     \end{center}
@@ -160,16 +133,12 @@
 \newcommand{\makesstatement}{
   \chapter*{学位论文独创性声明}
   \addcontentsline{toc}{chapter}{学位论文独创性声明}
-  
-  本人声明所呈交的学位论文是本人在导师指导下进行的研究工作及取得的研究成果。据我所知，除了文中特别加以标注和致谢的地方外，论文中不包含其他人已经发表或撰写过的研究成果，也不包含为获得南昌大学或其他教育机构学位或证书而使用过的材料。与我一同工作的同志对本研究所做的任何贡献均已在论文中作了明确的说明并表示谢意。
-  
+  本人声明所呈交的学位论文是本人在导师指导下进行的研究工作及取得的研究成果。
   \vspace{2cm}
-  
   \begin{flushright}
     学位论文作者签名（手写）：\underline{\hspace{4cm}} \\
     签字日期：\hspace{1cm}年\hspace{1cm}月\hspace{1cm}日
   \end{flushright}
-  
   \newpage
 }
 
@@ -177,47 +146,33 @@
 \newcommand{\makecopyright}{
   \chapter*{学位论文版权使用授权书}
   \addcontentsline{toc}{chapter}{学位论文版权使用授权书}
-  
-  本学位论文作者完全了解南昌大学有关保留、使用学位论文的规定，同意学校有权保留并向国家有关部门或机构送交论文的复印件和电子版，允许论文被查阅和借阅。本人授权南昌大学可以将学位论文的全部或部分内容编入有关数据库进行检索，可以采用影印、缩印或扫描等复制手段保存、汇编本学位论文。
-  
+  本学位论文作者完全了解南昌大学有关保留、使用学位论文的规定。
   \vspace{1cm}
-  
   学位论文作者签名（手写）：\underline{\hspace{4cm}} \hspace{2cm} 导师签名（手写）：\underline{\hspace{4cm}} \\
-  
   签字日期：\hspace{1cm}年\hspace{1cm}月\hspace{1cm}日 \hspace{2cm} 签字日期：\hspace{1cm}年\hspace{1cm}月\hspace{1cm}日
-  
   \newpage
 }
 
-% 中文摘要
+% 摘要
 \newcommand{\cabstract}[2]{
   \chapter*{摘\phantom{}要}
   \addcontentsline{toc}{chapter}{摘\phantom{}要}
-  
   #1
-  
   \vspace{1cm}
-  
   \textbf{关键词：}#2
-  
   \newpage
 }
 
-% 英文摘要
 \newcommand{\eabstract}[2]{
   \chapter*{ABSTRACT}
   \addcontentsline{toc}{chapter}{ABSTRACT}
-  
   #1
-  
   \vspace{1cm}
-  
   \textbf{Key Words:} #2
-  
   \newpage
 }
 
-% 目录（使用基础版）
+% 目录
 \newcommand{\tableofcontents}{
   \chapter*{目\phantom{}录}
   \addcontentsline{toc}{chapter}{目\phantom{}录}
@@ -225,12 +180,9 @@
   \newpage
 }
 
-% 参考文献命令
-\newcommand{\bibentry}[1]{\bibitem{#1}}
-
 \begin{document}
 
-% ============ 论文信息设置 ============
+% 论文信息
 \classification{}
 \udc{}
 \studentid{}
@@ -244,49 +196,41 @@
 \major{你的专业}
 \dateinput{2026}
 
-% ============ 生成封面 ============
+% 封面
 \makecover
 \thispagestyle{empty}
 \newpage
 
-% ============ 独创性声明和版权页 ============
+% 声明
 \makesstatement
 \makecopyright
 
-% ============ 摘要 ============
+% 摘要
 \cabstract{
-随着大语言模型技术的快速发展，工业代码生成领域迎来了新的机遇与挑战。传统的工业代码生成方法主要依赖规则模板和专家系统，难以应对复杂多变的工业场景需求。本文提出一种基于大模型的工业代码生成与测试系统研究方案，旨在利用Transformer架构的强大表示能力，结合检索增强生成（RAG）技术和参数高效微调方法（LoRA），构建一套完整的工业代码生成、测试与验证一体化系统。
+随着大语言模型技术的快速发展，工业代码生成领域迎来了新的机遇与挑战。本文提出一种基于大模型的工业代码生成与测试系统研究方案。
 }
-
-{大语言模型；工业代码生成；检索增强生成；LoRA微调；Transformer；系统测试}
+{大语言模型；工业代码生成；RAG；LoRA；Transformer}
 
 \eabstract{
-With the rapid development of Large Language Model (LLM) technology, the field of industrial code generation has encountered new opportunities and challenges. Traditional industrial code generation methods mainly rely on rule-based templates and expert systems, which struggle to meet the complex and variable requirements of industrial scenarios.
+With the rapid development of Large Language Model technology, this paper proposes a research scheme for an industrial code generation and testing system based on large models.
 }
+{Large Language Model; Industrial Code Generation; RAG; LoRA; Transformer}
 
-{Large Language Model; Industrial Code Generation; Retrieval-Augmented Generation; LoRA Fine-tuning; Transformer; System Testing}
-
-% ============ 目录 ============
+% 目录
 \tableofcontents
 
-% ============ 正文 ============
+% 正文
 \mainmatter
 
 \chapter{第一章 绪论}
 
 \section{研究背景与意义}
 
-随着人工智能技术的飞速发展，大语言模型（Large Language Model, LLM）在自然语言处理领域取得了突破性进展。
+随着人工智能技术的飞速发展，大语言模型（LLM）在自然语言处理领域取得了突破性进展。
 
 \section{国内外研究现状}
 
 大语言模型在代码生成领域的应用研究已成为学术界和工业界的热点方向。
-
-\section{研究内容与创新点}
-
-本文的主要研究内容包括：构建面向工业控制领域的专业知识库等。
-
-\section{本章小结}
 
 \chapter{第二章 相关技术与理论基础}
 
@@ -298,35 +242,11 @@ Transformer是一种基于自注意力机制的神经网络架构。
 
 大语言模型是基于Transformer架构的大规模预训练语言模型。
 
-\section{检索增强生成（RAG）技术}
-
-检索增强生成是一种将信息检索与文本生成相结合的技术框架。
-
-\section{工业代码生成技术概述}
-
-工业代码生成是指利用自动化技术生成工业控制领域代码的过程。
-
-\section{本章小结}
-
 \chapter{第三章 系统需求分析与总体设计}
 
 \section{系统需求分析}
 
-本节从功能需求、性能需求和安全隐私需求三个方面对系统进行需求分析。
-
-\section{系统总体架构设计}
-
-本系统采用分层架构设计，主要包括数据层、服务层和应用层三个层次。
-
-\section{基础模型选择}
-
-经过综合比较，本文选择Qwen2-72B-Instruct作为基础模型。
-
-\section{知识库构建}
-
-本系统构建了三类知识库，为模型生成提供领域知识支撑。
-
-\section{本章小结}
+本节从功能需求、性能需求和安全隐私需求三个方面进行分析。
 
 \chapter{第四章 关键技术实现}
 
@@ -334,35 +254,11 @@ Transformer是一种基于自注意力机制的神经网络架构。
 
 RAG检索增强模块是系统实现知识注入的核心组件。
 
-\section{模型微调模块实现}
-
-模型微调模块采用LoRA技术对基础模型进行领域适配。
-
-\section{提示词工程设计}
-
-提示词工程是提升代码生成质量的关键技术手段。
-
-\section{纠错验证模块实现}
-
-纠错验证模块是确保生成代码质量的重要保障。
-
-\section{本章小结}
-
 \chapter{第五章 系统集成与测试}
 
 \section{系统集成方案}
 
 系统集成是将各功能模块组合成完整系统的过程。
-
-\section{测试方案设计}
-
-为全面评估系统性能，本文设计了功能测试、性能测试和安全性测试三个层面的测试方案。
-
-\section{实验结果与分析}
-
-本文在自建的工业代码生成测试集上进行了实验。
-
-\section{本章小结}
 
 \chapter{第六章 结论与展望}
 
@@ -370,26 +266,16 @@ RAG检索增强模块是系统实现知识注入的核心组件。
 
 本文围绕基于大模型的工业代码生成与测试系统展开研究，取得了以下主要成果。
 
-\section{研究局限与未来展望}
-
-尽管本文取得了一定的研究成果，但仍存在以下局限性。
-
-% ============ 致谢 ============
+% 致谢
 \chapter*{致谢}
 \addcontentsline{toc}{chapter}{致谢}
-
 感谢导师的悉心指导。
 
-感谢实验室各位同学的帮助。
-
-% ============ 参考文献 ============
+% 参考文献
 \chapter*{参考文献}
 \addcontentsline{toc}{chapter}{参考文献}
-
 \begin{thebibliography}{99}
-
-\bibitem{1} VASWANI A, SHAZEER N, PARMAR N, et al. Attention Is All You Need[C]. Advances in Neural Information Processing Systems, 2017: 5998-6008.
-
+\bibitem{1} VASWANI A, et al. Attention Is All You Need[C]. NeurIPS, 2017.
 \end{thebibliography}
 
 \end{document}
