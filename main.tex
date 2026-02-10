@@ -1,25 +1,25 @@
 % 南昌大学专业学位硕士学位论文LaTeX模板
-% 适用于Overleaf
+% 适用于Overleaf (使用XeLaTeX编译)
 
 \documentclass[12pt,a4paper,oneside]{book}
 
 % 导入必要的宏包
-\usepackage[UTF8]{ctex}           % 中文支持
-\usepackage{amsmath,amssymb}      % 数学公式
-\usepackage{geometry}             % 页面设置
-\usepackage{setspace}             % 行距设置
-\usepackage{titlesec}             % 标题格式
-\usepackage{titletoc}             % 目录格式
-\usepackage{fancyhdr}             % 页眉页脚
-\usepackage{graphicx}             % 图形支持
-\usepackage{caption}             % 图表标题
-\usepackage{subcaption}           % 子图标题
-\usepackage{booktabs}             % 表格线
-\usepackage[hidelinks]{hyperref}  % 超链接
-\usepackage{listings}             % 代码块
-\usepackage{xcolor}              % 颜色支持
-\usepackage{longtable}           % 长表格
-\usepackage{appendix}             % 附录
+\usepackage{xeCJK}                    % 中文支持（XeLaTeX）
+\usepackage{amsmath,amssymb}          % 数学公式
+\usepackage{geometry}                 % 页面设置
+\usepackage{setspace}                 % 行距设置
+\usepackage{titlesec}                 % 标题格式
+\usepackage{fancyhdr}                 % 页眉页脚
+\usepackage{graphicx}                 % 图形支持
+\usepackage{caption}                 % 图表标题
+\usepackage{subcaption}               % 子图标题
+\usepackage{booktabs}                % 表格线
+\usepackage[hidelinks]{hyperref}      % 超链接
+\usepackage{listings}                % 代码块
+\usepackage{xcolor}                  % 颜色支持
+\usepackage{longtable}               % 长表格
+\usepackage{appendix}                % 附录
+\usepackage{enumitem}                % 列表样式
 
 % 页面设置
 \geometry{
@@ -34,16 +34,24 @@
 % 行距设置
 \linespread{1.5}
 
+% 中文字体设置
+\setCJKmainfont{SimSun}[BoldFont=SimHei, ItalicFont=KaiTi]
+\setCJKsansfont{SimHei}
+\setCJKfamilyfont{song}{SimSun}
+\setCJKfamilyfont{hei}{SimHei}
+\setCJKfamilyfont{kai}{KaiTi}
+\setCJKfamilyfont{fs}{FangSong}
+
+\newcommand{\song}{\CJKfamily{song}}
+\newcommand{\hei}{\CJKfamily{hei}}
+\newcommand{\kai}{\CJKfamily{kai}}
+\newcommand{\fs}{\CJKfamily{fs}}
+
 % 标题格式设置
 \titleformat{\chapter}{\centering\hei\zihao{3}}{\chaptertitle}{1em}{}
 \titleformat{\section}{\hei\zihao{4}}{\thesection}{1em}{}
 \titleformat{\subsection}{\hei\zihao{-4}}{\thesubsection}{1em}{}
 \titleformat{\subsubsection}{\hei\zihao{-4}}{\thesubsubsection}{1em}{}
-
-% 目录格式
-\titlecontents{chapter}[0pt]{\hei\zihao{-4}}{\contentslabel{1em}}{}{\titlerule*[0.5pc]{.}\contentspage}
-\titlecontents{section}[2em]{\zihao{-4}}{\contentslabel{2em}}{}{\titlerule*[0.5pc]{.}\contentspage}
-\titlecontents{subsection}[4em]{\zihao{-4}}{\contentslabel{3em}}{}{\titlerule*[0.5pc]{.}\contentspage}
 
 % 页眉页脚设置
 \fancypagestyle{plain}{
@@ -56,16 +64,8 @@
 \fancyfoot[C]{\zihao{-5}\thepage}
 \fancyhead[C]{\zihao{-5}\leftmark}
 
-% 中文字体设置
-\setCJKmainfont{宋体}[BoldFont={黑体},ItalicFont={楷体}]
-\setCJKsansfont{黑体}
-\setCJKfamilyfont{hei}{黑体}
-\setCJKfamilyfont{kai}{楷体}
-\newcommand{\hei}{\CJKfamily{hei}}
-\newcommand{\kai}{\CJKfamily{kai}}
-
 % 图表标题格式
-\captionsetup{font={sf,small},labelfont={sf,small}}
+\captionsetup{font={normalsize},labelfont={normalsize}}
 \renewcommand{\figurename}{图}
 \renewcommand{\tablename}{表}
 
@@ -131,12 +131,12 @@
     \begin{center}
       \zihao{4}
       \begin{tabular}{ll}
-        作\phantom{XX}者\phantom{XX}姓\phantom{XX}名： & \@authorname \\ [0.5cm]
-        培\phantom{XX}养\phantom{XX}单\phantom{XX}位： & \@college \\ [0.5cm]
-        指\phantom{XX}导\phantom{XX}教\phantom{XX}师： & \@supervisor \\ [0.5cm]
+        作~~者~~姓~~名： & \@authorname \\ [0.5cm]
+        培~~养~~单~~位： & \@college \\ [0.5cm]
+        指~~导~~教~~师： & \@supervisor \\ [0.5cm]
         & \@supervisorsecond \\ [0.5cm]
-        专\phantom{XX}业\phantom{XX}学\phantom{XX}位： & \@major \\ [0.5cm]
-        答\phantom{XX}辩\phantom{XX}日\phantom{XX}期： & \@dateinput
+        专~~业~~学~~位： & \@major \\ [0.5cm]
+        答~~辩~~日~~期： & \@dateinput
       \end{tabular}
     \end{center}
     \vspace{2cm}
@@ -145,7 +145,7 @@
     \begin{flushleft}
       \zihao{-4}
       \hspace{1cm}答辩委员会主席：\underline{\hspace{3cm}} \\
-      \hspace{1cm}评\phantom{XX}阅\phantom{XX}人：\underline{\hspace{3cm}}
+      \hspace{1cm}评~~阅~~人：\underline{\hspace{3cm}}
     \end{flushleft}
     \vspace{2cm}
     
@@ -217,7 +217,7 @@
   \newpage
 }
 
-% 目录
+% 目录（使用基础版）
 \newcommand{\tableofcontents}{
   \chapter*{目\phantom{}录}
   \addcontentsline{toc}{chapter}{目\phantom{}录}
@@ -260,9 +260,9 @@
 本研究首先构建了面向工业控制领域的专业知识库，包括语法知识库、案例知识库和领域参考文档库，为模型提供丰富的上下文信息。其次，采用LoRA微调技术对Qwen2-72B-Instruct模型进行领域适配，在保持模型通用能力的同时提升其在工业代码生成任务上的性能表现。此外，本文设计了多层纠错验证机制，通过语法检查、编译器检查和迭代修正，有效提高了生成代码的正确性和可靠性。
 
 实验结果表明，本文提出的系统在工业代码生成任务上取得了显著成效，在代码准确率、生成效率和领域适应性等方面均优于现有方法。该研究对于推动工业自动化智能化发展具有重要的理论价值和实际意义。
-
-}{大语言模型；工业代码生成；检索增强生成；LoRA微调；Transformer；系统测试
 }
+
+{大语言模型；工业代码生成；检索增强生成；LoRA微调；Transformer；系统测试}
 
 \eabstract{
 With the rapid development of Large Language Model (LLM) technology, the field of industrial code generation has encountered new opportunities and challenges. Traditional industrial code generation methods mainly rely on rule-based templates and expert systems, which struggle to meet the complex and variable requirements of industrial scenarios. This paper proposes a research scheme for an industrial code generation and testing system based on large models, aiming to leverage the powerful representation capabilities of Transformer architecture, combined with Retrieval-Augmented Generation (RAG) technology and Parameter-Efficient Fine-Tuning (LoRA) methods, to construct an integrated system for industrial code generation, testing, and verification.
@@ -272,8 +272,7 @@ This research first constructs a professional knowledge base for the industrial 
 Experimental results demonstrate that the proposed system achieves significant effectiveness in industrial code generation tasks, outperforming existing methods in code accuracy, generation efficiency, and domain adaptability. This research holds important theoretical value and practical significance for promoting the intelligent development of industrial automation.
 }
 
-{Large Language Model; Industrial Code Generation; Retrieval-Augmented Generation; LoRA Fine-tuning; Transformer; System Testing
-}
+{Large Language Model; Industrial Code Generation; Retrieval-Augmented Generation; LoRA Fine-tuning; Transformer; System Testing}
 
 % ============ 目录 ============
 \tableofcontents
@@ -300,6 +299,7 @@ Experimental results demonstrate that the proposed system achieves significant e
 \section{研究内容与创新点}
 
 本文的主要研究内容包括：
+
 \begin{enumerate}
     \item 构建面向工业控制领域的专业知识库，包括语法知识库、案例知识库和领域文档库；
     \item 研究基于RAG的检索增强技术，实现领域知识的有效注入；
@@ -308,6 +308,7 @@ Experimental results demonstrate that the proposed system achieves significant e
 \end{enumerate}
 
 本研究的创新点主要体现在：
+
 \begin{enumerate}
     \item 提出了一种融合RAG与LoRA的工业代码生成框架，实现了领域知识的高效融入；
     \item 设计了面向工业场景的多层纠错验证机制，显著提高了生成代码的正确率；
@@ -386,7 +387,7 @@ RAG的核心技术包括嵌入模型、向量化存储和相似度检索。嵌�
 
 \textbf{案例知识库}：收集了工业控制领域的经典编程案例，包括电机控制、流水线控制、温度监控等典型场景。每个案例包含需求描述、代码实现和注释说明。
 
-\textbf{领域参考文档库}**：整理了工业控制领域的官方技术文档、用户手册和应用指南，为模型提供丰富的领域背景知识。
+\textbf{领域参考文档库}：整理了工业控制领域的官方技术文档、用户手册和应用指南，为模型提供丰富的领域背景知识。
 
 \section{本章小结}
 
