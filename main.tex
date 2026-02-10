@@ -1,7 +1,7 @@
 % 南昌大学专业学位硕士学位论文LaTeX模板
 % 适用于Overleaf
 
-\documentclass[12pt,a4paper,oneside]{ctexbook}
+\documentclass[12pt,a4paper,oneside]{book}
 
 \usepackage{geometry}
 \geometry{
@@ -28,6 +28,16 @@
 \usepackage{longtable}
 \usepackage{appendix}
 \usepackage{enumitem}
+\usepackage{xeCJK}
+\setCJKmainfont{Songti SC}[BoldFont=PingFang SC, ItalicFont=Kaiti SC]
+\setCJKsansfont{PingFang SC}
+\setCJKfamilyfont{song}{Songti SC}
+\setCJKfamilyfont{hei}{PingFang SC}
+\setCJKfamilyfont{kai}{Kaiti SC}
+\newcommand{\song}{\CJKfamily{song}}
+\newcommand{\hei}{\CJKfamily{hei}}
+\newcommand{\kai}{\CJKfamily{kai}}
+\newcommand{\heiti}{\CJKfamily{hei}}
 
 \captionsetup{font={normalsize},labelfont={normalsize}}
 \renewcommand{\figurename}{图}
@@ -403,33 +413,53 @@ RAG的优势包括：无需重新训练模型即可引入新知识；能够利�
 
 \section{3.2 系统总体架构设计}
 
-本系统采用分层架构设计，将系统划分为数据层、服务层和应用层三个层次，各层之间通过标准接口进行通信，实现了高内聚、低耦合的设计目标。
+本文提出的LLM4ATS系统采用分层架构设计，将系统划分为数据层、服务层和应用层三个层次，各层之间通过标准接口进行通信，实现了高内聚、低耦合的设计目标。系统总体架构如图3.1所示。
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.85\textwidth]{pipeline.png}
+  \caption{LLM4ATS系统总体架构图}
+  \label{fig:system_architecture}
+\end{figure}
 
 \subsection{3.2.1 系统整体框架}
 
 系统整体框架采用经典的三层架构设计：
 
-数据层负责存储和管理各类数据资源，是系统的基础设施层。该层包括向量数据库（存储知识库向量）、关系数据库（存储用户信息和日志）和文件存储（存储模型文件和配置）。数据层的设计需要考虑数据的持久化、一致性和扩展性。
-
-服务层是系统的核心，包含以下主要模块：RAG检索模块负责从知识库中检索相关信息；代码生成模块负责调用大模型生成工业代码；微调训练模块负责模型的领域适配训练；纠错验证模块负责代码的语法检查和编译验证。各模块之间通过RESTful API进行通信，实现了松耦合的模块设计。
-
-应用层提供用户交互接口，包括Web界面、API接口和命令行工具。应用层负责接收用户请求、调用服务层接口、返回处理结果。Web界面采用现代化的响应式设计，支持PC端和移动端访问。
+\begin{enumerate}
+    \item \textbf{数据层}：负责存储和管理各类数据资源，是系统的基础设施层。该层包括向量数据库（存储知识库向量，采用Faiss向量数据库）、关系数据库（存储用户信息和日志）和文件存储（存储模型文件和配置）。数据层的设计需要考虑数据的持久化、一致性和扩展性。
+    
+    \item \textbf{服务层}：是系统的核心，包含RAG检索模块、代码生成模块、微调训练模块和纠错验证模块四个主要模块。各模块之间通过RESTful API进行通信，实现了松耦合的模块设计。
+    
+    \item \textbf{应用层}：提供用户交互接口，包括Web界面、API接口和命令行工具。应用层负责接收用户请求、调用服务层接口、返回处理结果。Web界面采用现代化的响应式设计，支持PC端和移动端访问。
+\end{enumerate}
 
 \subsection{3.2.2 核心模块划分}
 
 系统的核心模块包括：
 
-（1）RAG检索模块：负责将用户输入转换为向量表示，并在知识库中进行相似度检索，返回最相关的文档。该模块采用了BGE嵌入模型和Faiss向量数据库，支持高效的近似最近邻搜索。
+\begin{enumerate}
+    \item \textbf{RAG检索模块}：负责将用户输入转换为向量表示，并在知识库中进行相似度检索，返回最相关的文档。该模块采用了BGE嵌入模型和Faiss向量数据库，支持高效的近似最近邻搜索。
+    
+    \item \textbf{代码生成模块}：负责调用大语言模型生成工业自动化测试脚本。该模块接收用户输入和检索结果，构造提示词，调用模型生成代码，并对生成结果进行后处理。
+    
+    \item \textbf{微调训练模块}：负责对基础模型进行领域适配训练。该模块支持LoRA微调方法，提供了数据预处理、训练配置、模型保存等功能。
+    
+    \item \textbf{纠错验证模块}：负责对生成代码进行质量验证。该模块包括语法检查、编译验证和迭代修正三个子模块，确保生成代码的正确性和可靠性。
+    
+    \item \textbf{知识库管理模块}：负责知识库的创建、更新、查询和管理。该模块支持多种格式的文档导入，提供了知识的分类、标签和检索功能。
+    
+    \item \textbf{用户管理模块}：负责用户的注册、登录、权限管理等功能。该模块支持多种认证方式，保障系统的安全性。
+\end{enumerate}
 
-（2）代码生成模块：负责调用大语言模型生成工业代码。该模块接收用户输入和检索结果，构造提示词，调用模型生成代码，并对生成结果进行后处理。
+图3.2展示了LLM4ATS的工作流程。
 
-（3）微调训练模块：负责对基础模型进行领域适配训练。该模块支持LoRA微调方法，提供了数据预处理、训练配置、模型保存等功能。
-
-（4）纠错验证模块：负责对生成代码进行质量验证。该模块包括语法检查、编译验证和迭代修正三个子模块，确保生成代码的正确性和可靠性。
-
-（5）知识库管理模块：负责知识库的创建、更新、查询和管理。该模块支持多种格式的文档导入，提供了知识的分类、标签和检索功能。
-
-（6）用户管理模块：负责用户的注册、登录、权限管理等功能。该模块支持多种认证方式，保障系统的安全性。
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.85\textwidth]{processed.png}
+  \caption{LLM4ATS工作流程图}
+  \label{fig:workflow}
+\end{figure}
 
 \subsection{3.2.3 数据流程设计}
 
@@ -567,7 +597,28 @@ Qwen2-72B-Instruct在各项基准测试中表现优异，是目前开源大语�
 
 \section{4.1 RAG检索增强模块实现}
 
-RAG检索增强模块是系统实现知识注入的核心组件，其实现主要包括向量化处理、相似度检索和上下文构建三个环节。
+RAG检索增强模块是系统实现知识注入的核心组件，其实现主要包括向量化处理、相似度检索和上下文构建三个环节。图4.1展示了RAG阶段的工作流程。
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.85\textwidth]{processed.png}
+  \caption{RAG检索增强流程图}
+  \label{fig:rag_flowchart}
+\end{figure}
+
+\subsection{4.1.1 向量化处理流程}
+
+向量化处理是将文本转换为向量表示的过程，是RAG系统的基础环节。本系统的向量化处理流程如下：
+
+（1）文本预处理：对输入文本进行清洗、分词、标准化等预处理操作。去除无关字符、统一标点符号、转换繁简体等。
+
+（2）分块处理：对长文档进行分块处理，每块包含512-1024个tokens。分块时采用滑动窗口方式，确保语义的完整性。
+
+（3）向量化：使用嵌入模型将文本块转换为向量表示。嵌入模型选用BGE-large-zh-v1.5，该模型在中文语义理解任务上表现优异。
+
+（4）向量存储：将向量和对应的文本块存储到Faiss向量数据库中，建立索引以支持快速检索。
+
+向量化处理的质量直接影响检索效果。系统采用重叠分块策略，在相邻块之间保留一定的重叠区域，避免语义截断。
 
 \subsection{4.1.1 向量化处理流程}
 
@@ -661,7 +712,14 @@ LoRA微调将可训练参数量从72B降低到约120M（不到0.2\%），大幅�
 
 \section{4.3 提示词工程设计}
 
-提示词工程是提升代码生成质量的关键技术手段。本系统针对工业代码生成场景，设计了系统化的提示词模板。
+提示词工程是提升代码生成质量的关键技术手段。本系统针对工业自动化测试脚本生成场景，设计了系统化的提示词模板。提示词设计流程如图4.2所示。
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.85\textwidth]{prompt_all.png}
+  \caption{提示词设计流程图}
+  \label{fig:prompt_design}
+\end{figure}
 
 \subsection{4.3.1 基础指令设计}
 
@@ -873,17 +931,65 @@ CoT策略通过显式要求模型输出推理过程，提高了生成代码的�
 
 \subsection{5.3.2 代码生成质量评估}
 
-在代码生成质量方面，本文提出的系统取得了显著成效：
+本文在自建的工业代码生成测试集上进行了全面的实验验证，采用PASS@1、PASS@10等指标评估代码生成质量，并与多种基线方法进行了对比。表5.1展示了不同模型在不同配置下的性能对比。
 
-（1）BLEU分数：达到了68.7分，较基线方法提升了16.4个百分点。
+\begin{table}[htbp]
+  \centering
+  \caption{不同模型在不同配置下的性能对比}
+  \begin{tabular}{ccccccc}
+    \toprule
+    模型 & 方法 & PASS@1 & PASS@10 & 可读性 & 正确性 & 最佳实践 \\
+    \midrule
+    \multicolumn{7}{c}{GPT-3.5} \\
+    & Raw & 5\% & 8\% & 1.5 & 1.8 & 1.4 \\
+    & Zero-Shot & 24\% & 42\% & 2.0 & 2.5 & 1.4 \\
+    & Three-Shot & 54\% & 60\% & 3.5 & 4.5 & 3.6 \\
+    & LLM4ATS & \textbf{79\%} & \textbf{83\%} & \textbf{7.0} & \textbf{7.5} & \textbf{6.0} \\
+    \midrule
+    \multicolumn{7}{c}{GPT-4} \\
+    & Raw & 8\% & 23\% & 5.5 & 0.2 & 4.8 \\
+    & Zero-Shot & 42\% & 58\% & 5.2 & 4.0 & 5.1 \\
+    & Three-Shot & 65\% & 79\% & 6.5 & 6.2 & 6.4 \\
+    & LLM4ATS & \textbf{91\%} & \textbf{92\%} & \textbf{8.5} & \textbf{9.0} & \textbf{7.0} \\
+    \midrule
+    \multicolumn{7}{c}{Qwen2.5-7B} \\
+    & Zero-Shot & 18\% & 35\% & 1.8 & 1.0 & 1.9 \\
+    & LoRA & 25\% & 36\% & 2.5 & 2.4 & 2.3 \\
+    & Three-Shot & 34\% & 65\% & 3.3 & 3.5 & 3.4 \\
+    & LLM4ATS & \textbf{83\%} & \textbf{86\%} & \textbf{7.2} & \textbf{8.0} & \textbf{7.0} \\
+    \midrule
+    \multicolumn{7}{c}{Qwen2.5-72B-Instruct} \\
+    & Zero-Shot & 28\% & 51\% & 2.8 & 2.9 & 2.7 \\
+    & LoRA & 33\% & 57\% & 3.3 & 3.2 & 3.1 \\
+    & Three-Shot & 61\% & 86\% & 6.0 & 6.2 & 6.1 \\
+    & LLM4ATS & \textbf{89\%} & \textbf{91\%} & \textbf{9.0} & \textbf{8.5} & \textbf{7.0} \\
+    \bottomrule
+  \end{tabular}
+  \label{tab:model_comparison}
+\end{table}
 
-（2）语法正确率：达到了92.1\%，较基线方法提升了13.6个百分点。
+实验结果表明，本文提出的LLM4ATS框架在不同模型上均取得了显著的性能提升：
 
-（3）编译成功率：达到了89.3\%，较基线方法提升了18.1个百分点。
+\begin{itemize}
+    \item \textbf{GPT-4 + LLM4ATS}：在零样本基础上，PASS@1从42\%提升至91\%，提升幅度达49个百分点，取得了最佳性能。
+    
+    \item \textbf{Qwen2.5-72B-Instruct + LLM4ATS}：经过优化后PASS@1达到89\%，接近GPT-4的性能水平，展现了开源模型的潜力。
+    
+    \item \textbf{Qwen2.5-7B + LLM4ATS}：即使是小规模模型，通过LLM4ATS优化也能达到83\%的PASS@1，验证了框架的有效性。
+    
+    \item \textbf{人工评估指标}：在正确性、可读性和最佳实践三个方面，LLM4ATS生成的代码均获得了较高评分（7.0-9.0分）。
+\end{itemize}
 
-（4）人工评分：专业人员对生成代码的质量进行了评分，平均分为4.2分（满分5分）。
+图5.1展示了不同模型在各配置下的PASS@1指标对比。
 
-实验结果表明，本文提出的系统在工业代码生成质量方面显著优于基线方法。
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.8\textwidth]{pipeline.png}
+  \caption{不同模型PASS@1指标对比}
+  \label{fig:pass_rate_comparison}
+\end{figure}
+
+实验结果充分验证了LLM4ATS框架在工业自动化测试脚本生成任务上的有效性，显著优于零样本、少样本和纯LoRA基线方法。
 
 \subsection{5.3.3 检索效率分析}
 
